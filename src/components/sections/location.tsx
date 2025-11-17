@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react';
 
 export default function LocationSection() {
   const address = "Jl. Palebon Raya, Palebon, Kec. Pedurungan, Kota Semarang, Jawa Tengah 50246";
-  const gmapsEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.038379434057!2d110.45524631535948!3d-6.99290099496013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708d75283f5e55%3A0x1b3052a657c9179!2sKopimi%20Cafe!5e0!3m2!1sen!2sid!4v1687854652135!5m2!1sen!2sid";
+  const gmapsEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.038379434057!2d110.4662824!3d-7.0065642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708d75283f5e55%3A0x1b3052a657c9179!2sKopimi%20Cafe!5e0!3m2!1sen!2sid!4v1687854652135!5m2!1sen!2sid";
 
   return (
     <section id="location" className="py-20 md:py-32 bg-secondary">
@@ -31,7 +31,7 @@ export default function LocationSection() {
               {address}
             </p>
             <a 
-              href="https://maps.app.goo.gl/X18YhH32e2sY1ZWN9" 
+              href="https://maps.app.goo.gl/tWrzWAftGAF1XAyh6" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mt-4 inline-block text-primary hover:underline"
