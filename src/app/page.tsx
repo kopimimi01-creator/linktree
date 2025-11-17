@@ -5,6 +5,7 @@ import MenuSection from '@/components/sections/menu';
 import StorySection from '@/components/sections/story';
 import LocationSection from '@/components/sections/location';
 import CtaSection from '@/components/sections/cta';
+import OrderOnlineSection from '@/components/sections/order-online';
 import Footer from '@/components/footer';
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <MenuSection />
         <StorySection />
         <LocationSection />
+        <OrderOnlineSection />
         <CtaSection />
       </main>
       <Footer />

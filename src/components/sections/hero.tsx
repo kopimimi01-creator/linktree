@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -27,8 +28,8 @@ export default function HeroSection() {
             <p className="mt-2 text-lg text-muted-foreground">yang penting kamu</p>
           </div>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md">
-              Order Now
+            <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md" asChild>
+              <Link href="#order-online">Order Now</Link>
             </Button>
             <Button size="lg" variant="outline" className="transition-transform transform hover:scale-105 shadow-md">
               View Menu
