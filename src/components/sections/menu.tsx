@@ -4,11 +4,11 @@ const menu = {
   "Coffee Series": [
     { name: "Americano", price: "15.000" },
     { name: "Coffee Tubruk", price: "12.000" },
-    { name: "Salted Caramel Latte", price: "25.000" },
-    { name: "Caramel Latte", price: "22.000" },
-    { name: "Vanilla Latte", price: "22.000" },
-    { name: "Coffee Latte", price: "20.000" },
-    { name: "Kopi Susu Gula Aren", price: "25.000" },
+    { name: "Salted Caramel Latte", price: "23.000" },
+    { name: "Caramel Latte", price: "23.000" },
+    { name: "Vanilla Latte", price: "23.000" },
+    { name: "Coffee Latte", price: "23.000" },
+    { name: "Kopi Susu Gula Aren", price: "20.000" },
   ],
   "Non-Coffee Series": [
     { name: "Matcha Latte", price: "25.000" },
