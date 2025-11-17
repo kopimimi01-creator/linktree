@@ -7,7 +7,7 @@ export default function HeroSection() {
     <section className="w-full">
       <div className="relative h-48 md:h-64 w-full">
         <Image
-          src="https://picsum.photos/seed/cover-coffee/1200/400"
+          src="https://jelajahnesia.id/wp-content/uploads/2025/02/layout-artikel-4x3cm-8.jpg"
           alt="Coffee beans background"
           fill
           className="object-cover"
