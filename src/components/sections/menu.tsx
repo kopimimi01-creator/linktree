@@ -35,7 +35,7 @@ export default function MenuSection() {
         <div className="mt-16 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           {Object.entries(menu).map(([category, items]) => (
             <div key={category}>
-              <h3 className="text-2xl font-headline font-semibold text-secondary-foreground/80">{category}</h3>
+              <h3 className="text-2xl font-headline font-semibold text-primary-foreground/90">{category}</h3>
               <Separator className="my-4 bg-primary-foreground/20" />
               <ul className="space-y-4">
                 {items.map((item) => (
