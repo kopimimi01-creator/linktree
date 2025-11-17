@@ -72,7 +72,7 @@ export default function MenuSection() {
                           </span>
                         </div>
                       ) : (
-                        <span>{formatPrice(item.price)}</span>
+                        <span className="font-semibold">{formatPrice(item.price)}</span>
                       )}
                     </li>
                   ))}
