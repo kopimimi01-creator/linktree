@@ -40,8 +40,10 @@ const calculateDiscountedPrice = (price: number) => {
 
 export default function MenuSection() {
   const [isGoldenHour, setIsGoldenHour] = useState(false);
+  const [showBundling, setShowBundling] = useState(false);
 
   useEffect(() => {
+    // Golden Hour logic
     const checkGoldenHour = () => {
       const now = new Date();
       // WIB is UTC+7
@@ -52,7 +54,21 @@ export default function MenuSection() {
       setIsGoldenHour(goldenHourActive);
     };
 
+    // Bundling promo logic
+    const checkBundlingPromo = () => {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      // Promo ends on November 30th of the current year. Month is 0-indexed (10 = November)
+      const promoEndDate = new Date(currentYear, 10, 30, 23, 59, 59);
+      if (now <= promoEndDate) {
+        setShowBundling(true);
+      } else {
+        setShowBundling(false);
+      }
+    };
+
     checkGoldenHour();
+    checkBundlingPromo();
     // Check every minute to update the UI in real-time
     const interval = setInterval(checkGoldenHour, 60000); 
 
@@ -77,7 +93,7 @@ export default function MenuSection() {
                   <span className="text-lg">Diskon 10% untuk semua varian kopi</span>
                   <div className="flex items-center gap-2 mt-2 sm:mt-0 bg-amber-300/10 text-amber-300 px-3 py-1 rounded-full text-sm">
                     <Clock className="w-4 h-4"/> 
-                    <span className="font-semibold">08.00 - 13.00 WIB</span>
+                    <span className="font-semibold">Berakhir Pukul 13.00 WIB</span>
                   </div>
                 </div>
                 <p className="text-sm text-primary-foreground/60">*Kecuali menu Non-Coffee & Teh Tarik 1L.</p>
@@ -85,21 +101,23 @@ export default function MenuSection() {
             </div>
           )}
 
-          <div>
-            <div className="flex items-center gap-4">
-              <Gift className="w-7 h-7 text-amber-300" />
-              <h3 className="text-2xl font-headline font-semibold text-amber-300">Promo Bundling</h3>
+          {showBundling && (
+            <div>
+              <div className="flex items-center gap-4">
+                <Gift className="w-7 h-7 text-amber-300" />
+                <h3 className="text-2xl font-headline font-semibold text-amber-300">Promo Bundling</h3>
+              </div>
+              <Separator className="my-4 bg-primary-foreground/20" />
+              <ul className="space-y-4">
+                {bundles.map((bundle) => (
+                  <li key={bundle.name} className="flex justify-between items-baseline">
+                    <span className="text-primary-foreground/90">{bundle.name}</span>
+                    <span className="font-semibold text-amber-300">{formatPrice(bundle.price)}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <Separator className="my-4 bg-primary-foreground/20" />
-            <ul className="space-y-4">
-              {bundles.map((bundle) => (
-                <li key={bundle.name} className="flex justify-between items-baseline">
-                  <span className="text-primary-foreground/90">{bundle.name}</span>
-                  <span className="font-semibold text-amber-300">{formatPrice(bundle.price)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
             {Object.entries(menu).map(([category, items]) => (
