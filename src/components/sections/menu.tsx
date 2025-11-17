@@ -14,7 +14,9 @@ const menu = {
     { name: "Matcha Latte", price: "" },
     { name: "Chocolate Latte", price: "" },
     { name: "Taro Latte", price: "" },
-    { name: "Teh Tarik Medium/Large/1L", price: "" },
+    { name: "Teh Tarik Medium", price: "" },
+    { name: "Teh Tarik Large", price: "" },
+    { name: "Teh Tarik 1L", price: "" },
   ],
   "Signature Blends": [
     { name: "The Kopimi", price: "30.000" },
