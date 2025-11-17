@@ -1,12 +1,18 @@
-import AbstractShape2 from "@/components/icons/abstract-shape-2";
+import Image from "next/image";
 
 export default function StorySection() {
   return (
     <section className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <div className="relative w-full h-64 lg:h-full min-h-[300px] flex items-center justify-center">
-            <AbstractShape2 className="w-full max-w-md h-auto text-primary" />
+          <div className="relative w-full h-80 lg:h-full min-h-[400px] rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src="https://i.imgur.com/FWAdUSM.jpeg"
+              alt="Interior Kopimi Cafe"
+              fill
+              className="object-cover"
+              data-ai-hint="cafe interior"
+            />
           </div>
           <div className="text-left">
             <h2 className="text-4xl md:text-5xl font-headline font-bold">Cerita Kami</h2>
