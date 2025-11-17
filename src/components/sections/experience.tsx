@@ -5,30 +5,30 @@ export default function ExperienceSection() {
   const experiences = [
     {
       icon: Home,
-      title: "Warm Minimalist Interior",
-      description: "Our space is designed for peace and focus, blending natural textures with clean lines.",
+      title: "Interior Hangat & Simpel",
+      description: "Ruang kami dirancang untuk ketenangan, memadukan tekstur alami dengan garis-garis bersih.",
     },
     {
       icon: Smile,
-      title: "Friendly Service",
-      description: "Experience service that's as warm and inviting as our handcrafted beverages.",
+      title: "Pelayanan Ramah",
+      description: "Rasakan layanan yang sehangat dan se-mengundang minuman buatan tangan kami.",
     },
     {
       icon: Leaf,
-      title: "Consistent Flavor",
-      description: "A philosophy of quality and consistency ensures every sip is as perfect as the last.",
+      title: "Rasa yang Konsisten",
+      description: "Setiap tegukan sama sempurnanya dengan yang terakhir, berkat filosofi kualitas kami.",
     },
     {
       icon: Users,
-      title: "Community Atmosphere",
-      description: "More than a cafe, we are a gathering place for friends, colleagues, and creatives.",
+      title: "Suasana Komunitas",
+      description: "Lebih dari sekadar kafe, kami adalah tempat berkumpul untuk teman dan para kreatif.",
     },
   ];
 
   return (
     <section className="py-20 md:py-32 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl md:text-5xl font-headline font-bold text-center text-secondary-foreground">The Kopimi Experience</h2>
+        <h2 className="text-4xl md:text-5xl font-headline font-bold text-center text-secondary-foreground">Pengalaman di Kopimi</h2>
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {experiences.map((exp, index) => (
             <Card key={index} className="bg-background border-none shadow-sm hover:shadow-lg transition-shadow duration-300 rounded-lg">

@@ -9,9 +9,9 @@ export default function StorySection() {
             <AbstractShape2 className="w-full max-w-md h-auto text-primary" />
           </div>
           <div className="text-left">
-            <h2 className="text-4xl md:text-5xl font-headline font-bold">Our Story</h2>
+            <h2 className="text-4xl md:text-5xl font-headline font-bold">Cerita Kami</h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Kopimi Cafe started from a simple dream: to create a haven where the community could gather over exceptional drinks. We're not just serving beverages; we're building connections, fostering creativity, and providing a moment of warmth in your busy day. Our mission is to be your favorite third place—a space between work and home where you always feel you belong.
+              Kopimi Cafe dimulai dari mimpi sederhana: menciptakan tempat di mana komunitas bisa berkumpul sambil menikmati minuman istimewa. Kami bukan hanya menyajikan minuman; kami membangun koneksi dan memberikan momen hangat di tengah hari sibukmu.
             </p>
           </div>
         </div>

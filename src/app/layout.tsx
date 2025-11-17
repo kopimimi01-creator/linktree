@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Kopimi Experience',
-  description: 'A premium, modern, and elegant website for Kopimi Cafe.',
+  description: 'Kopimi Cafe: Sudut nyaman untuk kehangatan harimu. Yang Penting Kamu.',
 };
 
 export default function RootLayout({
