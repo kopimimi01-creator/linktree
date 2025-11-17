@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
           <div className="md:col-span-2">
             <Logo className="text-primary-foreground text-2xl" />
-            <p className="mt-4 max-w-sm">Crafted with heart, served with a smile. Your daily dose of warmth and welcome. Yang Penting Kamu</p>
+            <p className="mt-4 max-w-sm">Dibuat dengan hati, disajikan dengan senyuman. Dosis kehangatan dan sambutan harianmu. Yang Penting Kamu</p>
             <div className="flex space-x-4 mt-6">
               <Link href="#" aria-label="Twitter"><Twitter className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
               <Link href="#" aria-label="Instagram"><Instagram className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
@@ -29,8 +29,8 @@ export default function Footer() {
               <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0"/> <span>(123) 456-7890</span></li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-1"/>
-                <Link href="https://maps.app.goo.gl/tWrzWAftGAF1XAyh6" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
-                  Jl. Pahlawan Revolusi No.17, Pd. Bambu, Duren Sawit, Jakarta Timur
+                <Link href="https://maps.app.goo.gl/X18YhH32e2sY1ZWN9" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
+                  Jl. Palebon Raya, Palebon, Kec. Pedurungan, Kota Semarang, Jawa Tengah 50246
                 </Link>
               </li>
             </ul>

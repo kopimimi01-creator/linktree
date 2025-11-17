@@ -3,6 +3,7 @@ import AboutSection from '@/components/sections/about';
 import ExperienceSection from '@/components/sections/experience';
 import MenuSection from '@/components/sections/menu';
 import StorySection from '@/components/sections/story';
+import LocationSection from '@/components/sections/location';
 import CtaSection from '@/components/sections/cta';
 import Footer from '@/components/footer';
 
@@ -15,6 +16,7 @@ export default function Home() {
         <ExperienceSection />
         <MenuSection />
         <StorySection />
+        <LocationSection />
         <CtaSection />
       </main>
       <Footer />
