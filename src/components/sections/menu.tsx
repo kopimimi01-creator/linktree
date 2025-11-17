@@ -41,6 +41,7 @@ const calculateDiscountedPrice = (price: number) => {
 export default function MenuSection() {
   const [isGoldenHour, setIsGoldenHour] = useState(false);
   const [showBundling, setShowBundling] = useState(false);
+  const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
     // Golden Hour logic
@@ -54,25 +55,39 @@ export default function MenuSection() {
       setIsGoldenHour(goldenHourActive);
     };
 
-    // Bundling promo logic
-    const checkBundlingPromo = () => {
+    // Bundling promo & countdown logic
+    const calculateCountdown = () => {
       const now = new Date();
       const currentYear = now.getFullYear();
-      // Promo ends on November 30th of the current year. Month is 0-indexed (10 = November)
       const promoEndDate = new Date(currentYear, 10, 30, 23, 59, 59);
-      if (now <= promoEndDate) {
-        setShowBundling(true);
-      } else {
+
+      if (now > promoEndDate) {
         setShowBundling(false);
+        setCountdown("");
+        return;
       }
+
+      setShowBundling(true);
+      
+      const difference = promoEndDate.getTime() - now.getTime();
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     };
-
+    
     checkGoldenHour();
-    checkBundlingPromo();
-    // Check every minute to update the UI in real-time
-    const interval = setInterval(checkGoldenHour, 60000); 
+    calculateCountdown();
 
-    return () => clearInterval(interval);
+    const goldenHourInterval = setInterval(checkGoldenHour, 60000);
+    const countdownInterval = setInterval(calculateCountdown, 1000);
+
+    return () => {
+      clearInterval(goldenHourInterval);
+      clearInterval(countdownInterval);
+    };
   }, []);
 
   return (
@@ -116,6 +131,12 @@ export default function MenuSection() {
                   </li>
                 ))}
               </ul>
+              {countdown && (
+                <div className="mt-4 text-center">
+                  <p className="text-sm text-amber-300/80">Promo Berakhir Dalam:</p>
+                  <p className="text-xl font-bold font-mono tracking-widest text-amber-300">{countdown}</p>
+                </div>
+              )}
             </div>
           )}
 
