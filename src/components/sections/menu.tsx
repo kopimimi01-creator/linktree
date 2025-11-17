@@ -11,10 +11,10 @@ const menu = {
     { name: "Kopi Susu Gula Aren", price: "20.000" },
   ],
   "Non-Coffee Series": [
-    { name: "Matcha Latte", price: "25.000" },
-    { name: "Chai Latte", price: "25.000" },
-    { name: "Hot Chocolate", price: "22.000" },
-    { name: "Herbal Tea", price: "18.000" },
+    { name: "Matcha Latte", price: "" },
+    { name: "Chocolate Latte", price: "" },
+    { name: "Taro Latte", price: "" },
+    { name: "Teh Tarik Medium/Large/1L", price: "" },
   ],
   "Signature Blends": [
     { name: "The Kopimi", price: "30.000" },
@@ -44,7 +44,7 @@ export default function MenuSection() {
                 {items.map((item) => (
                   <li key={item.name} className="flex justify-between">
                     <span>{item.name}</span>
-                    <span>Rp {item.price}</span>
+                    <span>{item.price ? `Rp ${item.price}` : ''}</span>
                   </li>
                 ))}
               </ul>
