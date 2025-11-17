@@ -1,4 +1,5 @@
 import { Separator } from "@/components/ui/separator";
+import { Clock, Tag } from "lucide-react";
 
 const menu = {
   "Coffee Series": [
@@ -25,6 +26,24 @@ export default function MenuSection() {
     <section className="py-20 md:py-32 bg-[#06261C] text-primary-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-4xl md:text-5xl font-headline font-bold text-center">Explore Our Menu</h2>
+
+        <div className="mt-16 max-w-4xl mx-auto bg-background/5 border border-primary-foreground/20 rounded-2xl p-8 text-center shadow-lg">
+          <h3 className="text-3xl font-headline font-semibold text-amber-300">Golden Hours</h3>
+          <p className="mt-2 text-primary-foreground/80">Nikmati penawaran spesial setiap hari!</p>
+          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 text-lg">
+            <div className="flex items-center gap-2">
+              <Clock className="w-6 h-6 text-amber-300" />
+              <span>08.00 - 13.00</span>
+            </div>
+            <Separator orientation="vertical" className="hidden md:block h-6 bg-primary-foreground/20"/>
+            <div className="flex items-center gap-2">
+              <Tag className="w-6 h-6 text-amber-300" />
+              <span>Diskon 10% untuk semua varian kopi</span>
+            </div>
+          </div>
+           <p className="text-xs mt-4 text-primary-foreground/60">*Kecuali menu Non-Coffee & Teh Tarik 1L.</p>
+        </div>
+
         <div className="mt-16 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           {Object.entries(menu).map(([category, items]) => (
             <div key={category}>
