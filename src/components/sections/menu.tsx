@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { Clock, Sparkles } from "lucide-react";
+import { Clock, Sparkles, Gift } from "lucide-react";
 
 const menu = {
   "Coffee Series": [
@@ -23,6 +23,12 @@ const menu = {
     { name: "Teh Tarik 1L", price: 100000 },
   ],
 };
+
+const bundles = [
+  { name: "Vanilla Latte + Teh Tarik Large", price: 30000 },
+  { name: "Salted Caramel Latte + Teh Tarik Large", price: 30000 },
+  { name: "Caramel Latte + Teh Tarik Large", price: 30000 },
+];
 
 const formatPrice = (price: number) => {
   return `Rp ${price.toLocaleString('id-ID')}`;
@@ -69,8 +75,8 @@ export default function MenuSection() {
               <div className="space-y-4 text-primary-foreground/90">
                 <div className="flex flex-col sm:flex-row justify-between items-baseline">
                   <span className="text-lg">Diskon 10% untuk semua varian kopi</span>
-                  <div className="flex items-center gap-2 mt-2 sm:mt-0 bg-amber-300/10 text-amber-300 px-3 py-1 rounded-full">
-                    <Clock className="w-5 h-5"/> 
+                  <div className="flex items-center gap-2 mt-2 sm:mt-0 bg-amber-300/10 text-amber-300 px-3 py-1 rounded-full text-sm">
+                    <Clock className="w-4 h-4"/> 
                     <span className="font-semibold">08.00 - 13.00 WIB</span>
                   </div>
                 </div>
@@ -78,6 +84,22 @@ export default function MenuSection() {
               </div>
             </div>
           )}
+
+          <div>
+            <div className="flex items-center gap-4">
+              <Gift className="w-7 h-7 text-amber-300" />
+              <h3 className="text-2xl font-headline font-semibold text-amber-300">Promo Bundling</h3>
+            </div>
+            <Separator className="my-4 bg-primary-foreground/20" />
+            <ul className="space-y-4">
+              {bundles.map((bundle) => (
+                <li key={bundle.name} className="flex justify-between items-baseline">
+                  <span className="text-primary-foreground/90">{bundle.name}</span>
+                  <span className="font-semibold text-amber-300">{formatPrice(bundle.price)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
             {Object.entries(menu).map(([category, items]) => (
@@ -87,7 +109,7 @@ export default function MenuSection() {
                 <ul className="space-y-4">
                   {items.map((item) => (
                     <li key={item.name} className="flex justify-between items-baseline">
-                      <span>{item.name}</span>
+                      <span className="text-primary-foreground/90">{item.name}</span>
                       {isGoldenHour && category === 'Coffee Series' ? (
                         <div className="flex items-center gap-3">
                           <span className="text-primary-foreground/50 line-through text-sm">
