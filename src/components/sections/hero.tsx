@@ -24,7 +24,7 @@ export default function HeroSection() {
           </Avatar>
           <div className="text-center mt-4">
             <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Kopimi Cafe</h1>
-            <p className="mt-2 text-lg text-muted-foreground">A Warm Welcome In Every Cup</p>
+            <p className="mt-2 text-lg text-muted-foreground">yang penting kamu</p>
           </div>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md">
