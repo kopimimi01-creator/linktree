@@ -2,31 +2,31 @@ import { Separator } from "@/components/ui/separator";
 
 const menu = {
   "Coffee Series": [
-    { name: "Americano", price: "3.50" },
-    { name: "Coffee Tubruk", price: "3.00" },
-    { name: "Salted Caramel Latte", price: "5.00" },
-    { name: "Caramel Latte", price: "4.50" },
-    { name: "Vanilla Latte", price: "4.50" },
-    { name: "Coffee Latte", price: "4.50" },
-    { name: "Kopi Susu Gula Aren", price: "5.00" },
+    { name: "Americano", price: "15.000" },
+    { name: "Coffee Tubruk", price: "12.000" },
+    { name: "Salted Caramel Latte", price: "25.000" },
+    { name: "Caramel Latte", price: "22.000" },
+    { name: "Vanilla Latte", price: "22.000" },
+    { name: "Coffee Latte", price: "20.000" },
+    { name: "Kopi Susu Gula Aren", price: "25.000" },
   ],
   "Non-Coffee Series": [
-    { name: "Matcha Latte", price: "5.00" },
-    { name: "Chai Latte", price: "5.00" },
-    { name: "Hot Chocolate", price: "4.50" },
-    { name: "Herbal Tea", price: "3.50" },
+    { name: "Matcha Latte", price: "25.000" },
+    { name: "Chai Latte", price: "25.000" },
+    { name: "Hot Chocolate", price: "22.000" },
+    { name: "Herbal Tea", price: "18.000" },
   ],
   "Signature Blends": [
-    { name: "The Kopimi", price: "6.00" },
-    { name: "Forest Whisper", price: "5.50" },
-    { name: "Golden Hour", price: "5.50" },
-    { name: "Velvet Cloud", price: "6.00" },
+    { name: "The Kopimi", price: "30.000" },
+    { name: "Forest Whisper", price: "28.000" },
+    { name: "Golden Hour", price: "28.000" },
+    { name: "Velvet Cloud", price: "30.000" },
   ],
   "Seasonal Items": [
-    { name: "Pumpkin Spice", price: "5.50" },
-    { name: "Iced Lavender", price: "5.50" },
-    { name: "Gingerbread Latte", price: "6.00" },
-    { name: "Peppermint Mocha", price: "6.00" },
+    { name: "Pumpkin Spice", price: "28.000" },
+    { name: "Iced Lavender", price: "28.000" },
+    { name: "Gingerbread Latte", price: "30.000" },
+    { name: "Peppermint Mocha", price: "30.000" },
   ],
 };
 
@@ -44,7 +44,7 @@ export default function MenuSection() {
                 {items.map((item) => (
                   <li key={item.name} className="flex justify-between">
                     <span>{item.name}</span>
-                    <span>${item.price}</span>
+                    <span>Rp {item.price}</span>
                   </li>
                 ))}
               </ul>
