@@ -11,12 +11,12 @@ const menu = {
     { name: "Kopi Susu Gula Aren", price: "20.000" },
   ],
   "Non-Coffee Series": [
-    { name: "Matcha Latte", price: "" },
-    { name: "Chocolate Latte", price: "" },
-    { name: "Taro Latte", price: "" },
-    { name: "Teh Tarik Medium", price: "" },
-    { name: "Teh Tarik Large", price: "" },
-    { name: "Teh Tarik 1L", price: "" },
+    { name: "Matcha Latte", price: "25.000" },
+    { name: "Chocolate Latte", price: "20.000" },
+    { name: "Taro Latte", price: "23.000" },
+    { name: "Teh Tarik Medium", price: "15.000" },
+    { name: "Teh Tarik Large", price: "20.000" },
+    { name: "Teh Tarik 1L", price: "100.000" },
   ],
   "Signature Blends": [
     { name: "The Kopimi", price: "30.000" },
