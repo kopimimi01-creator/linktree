@@ -41,53 +41,62 @@ const calculateDiscountedPrice = (price: number) => {
 export default function MenuSection() {
   const [isGoldenHour, setIsGoldenHour] = useState(false);
   const [showBundling, setShowBundling] = useState(false);
-  const [countdown, setCountdown] = useState("");
+  const [bundlingCountdown, setBundlingCountdown] = useState("");
+  const [goldenHourCountdown, setGoldenHourCountdown] = useState("");
 
   useEffect(() => {
-    // Golden Hour logic
-    const checkGoldenHour = () => {
+    const timerLoop = () => {
+      // Common time setup
       const now = new Date();
-      // WIB is UTC+7
       const jakartaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
-      const currentHour = jakartaTime.getHours();
       
+      // Golden Hour logic
+      const currentHour = jakartaTime.getHours();
       const goldenHourActive = currentHour >= 8 && currentHour < 13;
       setIsGoldenHour(goldenHourActive);
-    };
 
-    // Bundling promo & countdown logic
-    const calculateCountdown = () => {
-      const now = new Date();
+      let goldenHourTarget = new Date(jakartaTime);
+      goldenHourTarget.setHours(13, 0, 0, 0); // End of promo today
+
+      if (currentHour >= 13) { // If past promo time, target is tomorrow
+        goldenHourTarget.setDate(goldenHourTarget.getDate() + 1);
+        goldenHourTarget.setHours(8, 0, 0, 0);
+      } else if (currentHour < 8) { // If before promo time, target is start of promo
+        goldenHourTarget.setHours(8, 0, 0, 0);
+      }
+
+      const ghDifference = goldenHourTarget.getTime() - jakartaTime.getTime();
+      if (goldenHourActive) {
+          const hours = Math.floor((ghDifference / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((ghDifference / 1000 / 60) % 60);
+          const seconds = Math.floor((ghDifference / 1000) % 60);
+          setGoldenHourCountdown(`${hours}h ${minutes}m ${seconds}s`);
+      } else {
+        setGoldenHourCountdown("");
+      }
+
+      // Bundling promo & countdown logic
       const currentYear = now.getFullYear();
       const promoEndDate = new Date(currentYear, 10, 30, 23, 59, 59);
 
       if (now > promoEndDate) {
         setShowBundling(false);
-        setCountdown("");
-        return;
+        setBundlingCountdown("");
+      } else {
+        setShowBundling(true);
+        const difference = promoEndDate.getTime() - now.getTime();
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / 1000 / 60) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+        setBundlingCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
       }
-
-      setShowBundling(true);
-      
-      const difference = promoEndDate.getTime() - now.getTime();
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((difference / 1000 / 60) % 60);
-      const seconds = Math.floor((difference / 1000) % 60);
-
-      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     };
     
-    checkGoldenHour();
-    calculateCountdown();
+    timerLoop();
+    const interval = setInterval(timerLoop, 1000);
 
-    const goldenHourInterval = setInterval(checkGoldenHour, 60000);
-    const countdownInterval = setInterval(calculateCountdown, 1000);
-
-    return () => {
-      clearInterval(goldenHourInterval);
-      clearInterval(countdownInterval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -111,6 +120,12 @@ export default function MenuSection() {
                     <span className="font-semibold">Berakhir Pukul 13.00 WIB</span>
                   </div>
                 </div>
+                 {goldenHourCountdown && (
+                  <div className="mt-4 text-center">
+                    <p className="text-sm text-amber-300/80">Promo Berakhir Dalam:</p>
+                    <p className="text-xl font-bold font-mono tracking-widest text-amber-300">{goldenHourCountdown}</p>
+                  </div>
+                )}
                 <p className="text-sm text-primary-foreground/60">*Kecuali menu Non-Coffee & Teh Tarik 1L.</p>
               </div>
             </div>
@@ -131,10 +146,10 @@ export default function MenuSection() {
                   </li>
                 ))}
               </ul>
-              {countdown && (
+              {bundlingCountdown && (
                 <div className="mt-4 text-center">
                   <p className="text-sm text-amber-300/80">Promo Berakhir Dalam:</p>
-                  <p className="text-xl font-bold font-mono tracking-widest text-amber-300">{countdown}</p>
+                  <p className="text-xl font-bold font-mono tracking-widest text-amber-300">{bundlingCountdown}</p>
                 </div>
               )}
             </div>
