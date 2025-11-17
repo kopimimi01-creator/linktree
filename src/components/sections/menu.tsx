@@ -18,18 +18,6 @@ const menu = {
     { name: "Teh Tarik Large", price: "20.000" },
     { name: "Teh Tarik 1L", price: "100.000" },
   ],
-  "Signature Blends": [
-    { name: "The Kopimi", price: "30.000" },
-    { name: "Forest Whisper", price: "28.000" },
-    { name: "Golden Hour", price: "28.000" },
-    { name: "Velvet Cloud", price: "30.000" },
-  ],
-  "Seasonal Items": [
-    { name: "Pumpkin Spice", price: "28.000" },
-    { name: "Iced Lavender", price: "28.000" },
-    { name: "Gingerbread Latte", price: "30.000" },
-    { name: "Peppermint Mocha", price: "30.000" },
-  ],
 };
 
 export default function MenuSection() {
