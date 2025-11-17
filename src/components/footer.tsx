@@ -29,7 +29,7 @@ export default function Footer() {
               <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0"/> <span>(123) 456-7890</span></li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-1"/>
-                <Link href="https://maps.app.goo.gl/X18YhH32e2sY1ZWN9" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
+                <Link href="https://maps.app.goo.gl/tWrzWAftGAF1XAyh6" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
                   Jl. Palebon Raya, Palebon, Kec. Pedurungan, Kota Semarang, Jawa Tengah 50246
                 </Link>
               </li>
