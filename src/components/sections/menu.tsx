@@ -2,10 +2,13 @@ import { Separator } from "@/components/ui/separator";
 
 const menu = {
   "Coffee Series": [
-    { name: "Espresso", price: "3.00" },
     { name: "Americano", price: "3.50" },
-    { name: "Latte", price: "4.50" },
-    { name: "Cappuccino", price: "4.50" },
+    { name: "Coffee Tubruk", price: "3.00" },
+    { name: "Salted Caramel Latte", price: "5.00" },
+    { name: "Caramel Latte", price: "4.50" },
+    { name: "Vanilla Latte", price: "4.50" },
+    { name: "Coffee Latte", price: "4.50" },
+    { name: "Kopi Susu Gula Aren", price: "5.00" },
   ],
   "Non-Coffee Series": [
     { name: "Matcha Latte", price: "5.00" },
