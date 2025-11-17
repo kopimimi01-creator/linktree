@@ -1,28 +1,39 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Logo from "@/components/logo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-[80vh] md:h-screen text-primary-foreground overflow-hidden">
-      <Image
-        src="https://picsum.photos/seed/hero-coffee/1920/1080"
-        alt="A cozy coffee shop interior"
-        fill
-        className="object-cover"
-        priority
-        data-ai-hint="cozy coffee shop"
-      />
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="container mx-auto px-4 md:px-6 text-center relative z-10 flex flex-col items-center justify-center h-full">
-        <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-white shadow-text">A Warm Welcome In Every Cup</h1>
-        <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-white/90 shadow-text">Kopimi Cafe — Crafted With Heart</p>
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" variant="secondary" className="transition-transform transform hover:scale-105 shadow-md">
-            Order Now
-          </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black transition-transform transform hover:scale-105 shadow-md backdrop-blur-sm bg-white/10">
-            View Menu
-          </Button>
+    <section className="w-full">
+      <div className="relative h-48 md:h-64 w-full">
+        <Image
+          src="https://picsum.photos/seed/cover-coffee/1200/400"
+          alt="Coffee beans background"
+          fill
+          className="object-cover"
+          priority
+          data-ai-hint="coffee beans"
+        />
+      </div>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="relative flex flex-col items-center -mt-16 md:-mt-24 pb-12 pt-4">
+          <Avatar className="w-32 h-32 md:w-48 md:h-48 border-4 border-background shadow-lg">
+            <AvatarImage src="https://picsum.photos/seed/logo-coffee/300/300" alt="Kopimi Cafe logo" data-ai-hint="cafe logo"/>
+            <AvatarFallback>KC</AvatarFallback>
+          </Avatar>
+          <div className="text-center mt-4">
+            <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Kopimi Cafe</h1>
+            <p className="mt-2 text-lg text-muted-foreground">A Warm Welcome In Every Cup</p>
+          </div>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md">
+              Order Now
+            </Button>
+            <Button size="lg" variant="outline" className="transition-transform transform hover:scale-105 shadow-md">
+              View Menu
+            </Button>
+          </div>
         </div>
       </div>
     </section>
