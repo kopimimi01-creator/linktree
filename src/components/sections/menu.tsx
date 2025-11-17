@@ -43,11 +43,12 @@ export default function MenuSection() {
             </div>
             <Separator className="my-4 bg-primary-foreground/20" />
             <div className="space-y-4 text-primary-foreground/90">
-              <div className="flex flex-col sm:flex-row justify-between">
-                <span>Diskon 10% untuk semua varian kopi</span>
-                <span className="flex items-center gap-2 mt-2 sm:mt-0">
-                  <Clock className="w-5 h-5"/> 08.00 - 13.00
-                </span>
+              <div className="flex flex-col sm:flex-row justify-between items-baseline">
+                <span className="text-lg">Diskon 10% untuk semua varian kopi</span>
+                <div className="flex items-center gap-2 mt-2 sm:mt-0 bg-amber-300/10 text-amber-300 px-3 py-1 rounded-full">
+                  <Clock className="w-5 h-5"/> 
+                  <span className="font-semibold">08.00 - 13.00</span>
+                </div>
               </div>
               <p className="text-sm text-primary-foreground/60">*Kecuali menu Non-Coffee & Teh Tarik 1L.</p>
             </div>
