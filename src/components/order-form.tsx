@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from '@/components/ui/sheet';
-import { ShoppingCart, Plus, Minus, Trash2, MapPin } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, Trash2, MapPin, RefreshCw } from 'lucide-react';
 
 const formatPrice = (price) => `Rp ${price.toLocaleString('id-ID')}`;
 
@@ -224,9 +224,14 @@ export default function OrderForm({ menuData }: OrderFormProps) {
                           <FormControl>
                             <div className="relative">
                                <Textarea placeholder="Jl. Pahlawan No. 123..." {...field} />
-                               <Button type="button" size="icon" variant="ghost" className="absolute top-1 right-1 h-8 w-8" onClick={autofillLocation}>
+                               <div className="absolute top-1 right-1 flex items-center">
+                                <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
                                   <MapPin className="h-4 w-4" />
-                               </Button>
+                                </Button>
+                                <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
+                                  <RefreshCw className="h-4 w-4" />
+                                </Button>
+                              </div>
                             </div>
                           </FormControl>
                           <FormMessage />
