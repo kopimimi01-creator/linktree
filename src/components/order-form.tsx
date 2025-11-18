@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
+import { Map } from 'lucide-react';
 
 const orderSchema = z.object({
   customerName: z.string().min(1, 'Nama tidak boleh kosong'),
@@ -56,6 +57,10 @@ export default function OrderForm() {
     window.open(whatsappUrl, '_blank');
   };
 
+  const openGoogleMaps = () => {
+    window.open('https://www.google.com/maps', '_blank');
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -77,9 +82,15 @@ export default function OrderForm() {
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Alamat Lengkap</FormLabel>
+              <div className="flex justify-between items-center">
+                <FormLabel>Alamat Lengkap</FormLabel>
+                <Button type="button" variant="link" className="h-auto p-0" onClick={openGoogleMaps}>
+                  <Map className="mr-2 h-4 w-4" />
+                  Buka Google Maps
+                </Button>
+              </div>
               <FormControl>
-                <Textarea placeholder="Jl. Pahlawan No. 123..." {...field} />
+                <Textarea placeholder="Salin dan tempel alamat Anda dari Google Maps di sini..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
