@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Clock, Sparkles, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/cart-context";
+import { useToast } from "@/hooks/use-toast";
 
 export const menu = {
   "Coffee Series": [
@@ -47,15 +49,23 @@ type MenuItem = {
 // Re-usable promo logic component
 export const Promos = ({ 
   onGoldenHourChange,
-  onAddToCart 
 }: { 
   onGoldenHourChange?: (isActive: boolean) => void,
-  onAddToCart?: (item: MenuItem) => void 
 }) => {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
   const [isGoldenHour, setIsGoldenHour] = useState(false);
   const [showBundling, setShowBundling] = useState(false);
   const [bundlingCountdown, setBundlingCountdown] = useState("");
   const [goldenHourCountdown, setGoldenHourCountdown] = useState("");
+
+  const handleAddToCart = (item: MenuItem) => {
+    addToCart(item);
+    toast({
+        title: "Ditambahkan ke keranjang",
+        description: `${item.name} telah ditambahkan.`,
+    })
+  };
 
   useEffect(() => {
     const timerLoop = () => {
@@ -164,11 +174,9 @@ export const Promos = ({
                     <span className={itemColor}>{bundle.name}</span>
                     <p className={`font-semibold ${priceColor}`}>{formatPrice(bundle.price)}</p>
                   </div>
-                  {onAddToCart && (
-                    <Button onClick={() => onAddToCart(bundle)} size="sm">
+                    <Button onClick={() => handleAddToCart(bundle)} size="sm">
                       Tambah
                     </Button>
-                  )}
                 </li>
             ))}
             </ul>
@@ -213,7 +221,7 @@ export default function MenuSection() {
   const itemColor = 'text-primary-foreground/90';
 
   return (
-    <section className={`py-20 md:py-32 ${bgColor} ${textColor}`}>
+    <section id="menu" className={`py-20 md:py-32 ${bgColor} ${textColor}`}>
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-4xl md:text-5xl font-headline font-bold text-center">Explore Our Menu</h2>
 
