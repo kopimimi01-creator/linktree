@@ -3,7 +3,7 @@
 
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import { LatLngExpression, LatLng, Icon } from 'leaflet';
+import { LatLngExpression, LatLng, Icon, Map } from 'leaflet';
 import { Button } from './ui/button';
 
 // Fix for default icon issues with Leaflet and Webpack
@@ -23,20 +23,17 @@ type MapPickerProps = {
 
 const SEMARANG_CENTER: LatLngExpression = [-7.0051, 110.4381]; // Centered on Semarang
 
-function LocationMarker({ position, setPosition }: { position: LatLng, setPosition: (pos: LatLng) => void }) {
+function LocationMarker({ position, setPosition, map }: { position: LatLng, setPosition: (pos: LatLng) => void, map: Map | null }) {
   const markerRef = useRef<any>(null);
   
-  const map = useMapEvents({
+  useMapEvents({
     click(e) {
       setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
+      if (map) {
+        map.flyTo(e.latlng, map.getZoom());
+      }
     },
   });
-
-  useEffect(() => {
-    map.flyTo(position, map.getZoom());
-  }, [position, map]);
-
 
   const eventHandlers = useMemo(
     () => ({
@@ -67,6 +64,7 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
   const [position, setPosition] = useState<LatLng>(new LatLng(SEMARANG_CENTER[0], SEMARANG_CENTER[1]));
   const [address, setAddress] = useState('Gerakkan penanda untuk memilih lokasi...');
   const [isLoading, setIsLoading] = useState(false);
+  const [map, setMap] = useState<Map | null>(null);
 
   const fetchAddress = useCallback(async (lat: number, lng: number) => {
     setIsLoading(true);
@@ -87,10 +85,10 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
     }
   }, []);
 
-  const handleSetPosition = (pos: LatLng) => {
+  const handleSetPosition = useCallback((pos: LatLng) => {
     setPosition(pos);
     fetchAddress(pos.lat, pos.lng);
-  }
+  }, [fetchAddress]);
 
   const handleConfirmLocation = () => {
     if (address && !address.includes('...')) {
@@ -105,12 +103,13 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
           center={position}
           zoom={13}
           style={{ height: '100%', width: '100%' }}
+          whenCreated={setMap}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <LocationMarker position={position} setPosition={handleSetPosition} />
+          <LocationMarker position={position} setPosition={handleSetPosition} map={map} />
         </MapContainer>
       </div>
       <div className="p-4 bg-background border-t">
