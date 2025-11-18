@@ -1,9 +1,9 @@
 
 'use client';
 
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import { LatLngExpression, Icon } from 'leaflet';
+import { LatLngExpression, LatLng, Icon } from 'leaflet';
 import { Button } from './ui/button';
 
 // Fix for default icon issues with Leaflet and Webpack
@@ -23,7 +23,7 @@ type MapPickerProps = {
 
 const SEMARANG_CENTER: LatLngExpression = [-7.0051, 110.4381]; // Centered on Semarang
 
-function LocationMarker({ position, setPosition }: { position: LatLngExpression, setPosition: (pos: LatLngExpression) => void }) {
+function LocationMarker({ position, setPosition }: { position: LatLng, setPosition: (pos: LatLng) => void }) {
   const markerRef = useRef<any>(null);
   
   const map = useMapEvents({
@@ -32,6 +32,11 @@ function LocationMarker({ position, setPosition }: { position: LatLngExpression,
       map.flyTo(e.latlng, map.getZoom());
     },
   });
+
+  useEffect(() => {
+    map.flyTo(position, map.getZoom());
+  }, [position, map]);
+
 
   const eventHandlers = useMemo(
     () => ({
@@ -59,7 +64,7 @@ function LocationMarker({ position, setPosition }: { position: LatLngExpression,
 
 
 export default function MapPicker({ onLocationSelect }: MapPickerProps) {
-  const [position, setPosition] = useState<LatLngExpression>(SEMARANG_CENTER);
+  const [position, setPosition] = useState<LatLng>(new LatLng(SEMARANG_CENTER[0], SEMARANG_CENTER[1]));
   const [address, setAddress] = useState('Gerakkan penanda untuk memilih lokasi...');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,11 +87,9 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
     }
   }, []);
 
-  const handleSetPosition = (pos: LatLngExpression) => {
+  const handleSetPosition = (pos: LatLng) => {
     setPosition(pos);
-    if ('lat' in pos && 'lng' in pos) {
-      fetchAddress(pos.lat, pos.lng);
-    }
+    fetchAddress(pos.lat, pos.lng);
   }
 
   const handleConfirmLocation = () => {
@@ -99,7 +102,7 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
     <div className="flex flex-col h-full">
       <div className="relative h-full w-full rounded-md overflow-hidden z-0">
         <MapContainer
-          center={SEMARANG_CENTER}
+          center={position}
           zoom={13}
           style={{ height: '100%', width: '100%' }}
         >

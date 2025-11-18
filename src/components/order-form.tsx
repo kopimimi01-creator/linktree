@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
-import { Map, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -105,12 +105,12 @@ export default function OrderForm() {
               <MapPin className="mr-2 h-4 w-4" /> Pilih Lokasi dari Peta
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl h-[80vh]">
+          <DialogContent className="max-w-3xl h-[80vh] flex flex-col">
             <DialogHeader>
               <DialogTitle>Pilih Lokasi Pengiriman</DialogTitle>
             </DialogHeader>
-            <div className="h-full w-full">
-               <MapPicker onLocationSelect={handleAddressSelect} />
+            <div className="h-full w-full flex-1">
+               {isMapOpen && <MapPicker onLocationSelect={handleAddressSelect} />}
             </div>
           </DialogContent>
         </Dialog>
