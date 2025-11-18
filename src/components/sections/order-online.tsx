@@ -19,7 +19,7 @@ export default function OrderOnlineSection() {
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
-            <Link href="#">
+            <Link href="https://gofood.link/a/RiJkUdG" target="_blank" rel="noopener noreferrer">
               <ShoppingCart className="mr-2 h-5 w-5" />
               Gojek
             </Link>
