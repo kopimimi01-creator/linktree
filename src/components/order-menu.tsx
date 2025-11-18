@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/cart-context';
-import { Promos, formatPrice, calculateDiscountedPrice } from '@/components/sections/menu';
+import { Promos, formatPrice, calculateDiscountedPrice, bundles } from '@/components/sections/menu';
 import { useToast } from '@/hooks/use-toast';
 
 type MenuItem = {
@@ -40,7 +40,7 @@ export default function OrderMenu({ menuData }: OrderMenuProps) {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-3">
         <div className="space-y-12">
-          <Promos onGoldenHourChange={setIsGoldenHour} />
+          <Promos onGoldenHourChange={setIsGoldenHour} onAddToCart={handleAddToCart} />
           {Object.entries(menuData).map(([category, items]) => (
             <div key={category}>
               <h3 className="text-2xl font-headline font-semibold text-primary mb-4">{category}</h3>

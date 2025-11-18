@@ -39,8 +39,19 @@ export const calculateDiscountedPrice = (price: number) => {
   return price * 0.9;
 };
 
+type MenuItem = {
+  name: string;
+  price: number;
+};
+
 // Re-usable promo logic component
-export const Promos = ({ onGoldenHourChange }: { onGoldenHourChange?: (isActive: boolean) => void }) => {
+export const Promos = ({ 
+  onGoldenHourChange,
+  onAddToCart 
+}: { 
+  onGoldenHourChange?: (isActive: boolean) => void,
+  onAddToCart?: (item: MenuItem) => void 
+}) => {
   const [isGoldenHour, setIsGoldenHour] = useState(false);
   const [showBundling, setShowBundling] = useState(false);
   const [bundlingCountdown, setBundlingCountdown] = useState("");
@@ -148,9 +159,16 @@ export const Promos = ({ onGoldenHourChange }: { onGoldenHourChange?: (isActive:
             <Separator className={`my-4 ${separatorColor}`} />
             <ul className="space-y-4">
             {bundles.map((bundle) => (
-                <li key={bundle.name} className="flex justify-between items-baseline">
-                <span className={itemColor}>{bundle.name}</span>
-                <span className={`font-semibold ${priceColor}`}>{formatPrice(bundle.price)}</span>
+                <li key={bundle.name} className="flex justify-between items-center gap-4">
+                  <div className="flex-1">
+                    <span className={itemColor}>{bundle.name}</span>
+                    <p className={`font-semibold ${priceColor}`}>{formatPrice(bundle.price)}</p>
+                  </div>
+                  {onAddToCart && (
+                    <Button onClick={() => onAddToCart(bundle)} size="sm">
+                      Tambah
+                    </Button>
+                  )}
                 </li>
             ))}
             </ul>
