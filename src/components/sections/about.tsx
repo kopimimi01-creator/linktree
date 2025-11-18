@@ -15,7 +15,7 @@ export default function AboutSection() {
             </div>
             <div className="text-center">
               <h3 className="text-2xl font-semibold font-headline">Kualitas</h3>
-              <p className="mt-2 text-muted-foreground">Bahan-bahan terbaik, diracik dengan ahli.</p>
+              <p className="mt-2 text-muted-foreground">Biji kopi pilihan dan bahan segar.</p>
             </div>
           </div>
           <div className="flex flex-col items-center gap-4">
@@ -24,7 +24,7 @@ export default function AboutSection() {
             </div>
             <div className="text-center">
               <h3 className="text-2xl font-semibold font-headline">Kenyamanan</h3>
-              <p className="mt-2 text-muted-foreground">Suasana nyaman untuk bersantai dan mengisi daya.</p>
+              <p className="mt-2 text-muted-foreground">Sudut yang nyaman untuk harimu.</p>
             </div>
           </div>
           <div className="flex flex-col items-center gap-4">
@@ -33,7 +33,7 @@ export default function AboutSection() {
             </div>
             <div className="text-center">
               <h3 className="text-2xl font-semibold font-headline">Kerajinan</h3>
-              <p className="mt-2 text-muted-foreground">Setiap minuman dibuat dengan semangat dan presisi.</p>
+              <p className="mt-2 text-muted-foreground">Minuman yang dibuat sepenuh hati.</p>
             </div>
           </div>
         </div>
