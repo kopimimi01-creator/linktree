@@ -10,9 +10,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
-import { MapPin } from 'lucide-react';
+import { MapPin, LocateFixed } from 'lucide-react';
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 
 const orderSchema = z.object({
   customerName: z.string().min(1, 'Nama tidak boleh kosong'),
@@ -22,6 +22,8 @@ const orderSchema = z.object({
 
 export default function OrderForm() {
   const { cart, totalPrice } = useCart();
+  const { toast } = useToast();
+  const [isLocating, setIsLocating] = useState(false);
   
   const form = useForm<z.infer<typeof orderSchema>>({
     resolver: zodResolver(orderSchema),
@@ -31,6 +33,57 @@ export default function OrderForm() {
       addressDetails: '',
     },
   });
+
+  const handleAutoLocation = async () => {
+    if (!navigator.geolocation) {
+      toast({
+        variant: "destructive",
+        title: "Geolocation tidak didukung",
+        description: "Browser Anda tidak mendukung fitur lokasi otomatis.",
+      });
+      return;
+    }
+
+    setIsLocating(true);
+    
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+          const data = await response.json();
+          if (data && data.display_name) {
+            form.setValue('address', data.display_name, { shouldValidate: true });
+            toast({
+              title: "Lokasi Ditemukan",
+              description: "Alamat telah diisi secara otomatis.",
+            });
+          } else {
+            throw new Error("Alamat tidak ditemukan.");
+          }
+        } catch (error) {
+          toast({
+            variant: "destructive",
+            title: "Gagal Mengambil Alamat",
+            description: "Tidak dapat menemukan alamat dari lokasi Anda.",
+          });
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (error) => {
+        let title = "Gagal Mendapatkan Lokasi";
+        let description = "Terjadi kesalahan saat mencoba mendapatkan lokasi Anda.";
+        if (error.code === error.PERMISSION_DENIED) {
+            title = "Izin Lokasi Ditolak"
+            description = "Anda perlu memberikan izin akses lokasi di browser Anda.";
+        }
+        toast({ variant: "destructive", title, description });
+        setIsLocating(false);
+      }
+    );
+  };
+
 
   const generateWhatsAppMessage = (data: z.infer<typeof orderSchema>) => {
     let message = `Halo Kopimi Cafe, saya mau pesan:\n\n`;
@@ -80,7 +133,19 @@ export default function OrderForm() {
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Alamat Lengkap</FormLabel>
+              <div className="flex justify-between items-center">
+                <FormLabel>Alamat Lengkap</FormLabel>
+                <Button 
+                  type="button" 
+                  variant="link" 
+                  className="h-auto p-0 text-xs" 
+                  onClick={handleAutoLocation}
+                  disabled={isLocating}
+                >
+                  <LocateFixed className="mr-1 h-3 w-3" />
+                  {isLocating ? 'Mencari...' : 'Gunakan Lokasi Saat Ini'}
+                </Button>
+              </div>
               <FormControl>
                 <Textarea placeholder="Masukkan alamat lengkap Anda..." {...field} />
               </FormControl>
