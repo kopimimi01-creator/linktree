@@ -10,8 +10,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from '@/components/ui/sheet';
 import { ShoppingCart, Plus, Minus, Trash2, MapPin, RefreshCw } from 'lucide-react';
+import MenuSection, { menu, bundles, formatPrice, calculateDiscountedPrice } from '@/components/sections/menu';
 
-const formatPrice = (price) => `Rp ${price.toLocaleString('id-ID')}`;
 
 const orderSchema = z.object({
   customerName: z.string().min(1, 'Nama tidak boleh kosong'),
@@ -99,6 +99,7 @@ export default function OrderForm({ menuData }: OrderFormProps) {
   };
 
   const autofillLocation = () => {
+    form.setValue('address', "Mencari lokasi...");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -120,10 +121,12 @@ export default function OrderForm({ menuData }: OrderFormProps) {
         },
         (error) => {
           alert(`Gagal mendapatkan lokasi: ${error.message}`);
+          form.setValue('address', "");
         }
       );
     } else {
       alert('Geolocation tidak didukung oleh browser ini.');
+      form.setValue('address', "");
     }
   };
 
@@ -132,24 +135,7 @@ export default function OrderForm({ menuData }: OrderFormProps) {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-3">
-          <div className="space-y-8">
-            {menuData && Object.entries(menuData).map(([category, items]) => (
-              <div key={category}>
-                <h3 className="text-2xl font-headline font-semibold text-primary mb-4">{category}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {items.map((item) => (
-                    <div key={item.name} className="border rounded-lg p-4 flex flex-col justify-between shadow-sm">
-                      <div>
-                        <h4 className="font-semibold">{item.name}</h4>
-                        <p className="text-muted-foreground">{formatPrice(item.price)}</p>
-                      </div>
-                      <Button onClick={() => addToCart(item)} className="mt-4 w-full">Tambah</Button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <MenuSection />
         </div>
       </div>
       
@@ -227,9 +213,11 @@ export default function OrderForm({ menuData }: OrderFormProps) {
                                <div className="absolute top-1 right-1 flex items-center">
                                 <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
                                   <MapPin className="h-4 w-4" />
+                                  <span className="sr-only">Gunakan lokasi saat ini</span>
                                 </Button>
                                 <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
                                   <RefreshCw className="h-4 w-4" />
+                                  <span className="sr-only">Segarkan lokasi</span>
                                 </Button>
                               </div>
                             </div>
