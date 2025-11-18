@@ -10,7 +10,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
-import { Map } from 'lucide-react';
+import { Map, MapPin } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+
+const MapPicker = dynamic(() => import('@/components/map-picker'), {
+  ssr: false,
+});
 
 const orderSchema = z.object({
   customerName: z.string().min(1, 'Nama tidak boleh kosong'),
@@ -20,6 +27,7 @@ const orderSchema = z.object({
 
 export default function OrderForm() {
   const { cart, totalPrice } = useCart();
+  const [isMapOpen, setMapOpen] = useState(false);
 
   const form = useForm<z.infer<typeof orderSchema>>({
     resolver: zodResolver(orderSchema),
@@ -29,6 +37,11 @@ export default function OrderForm() {
       addressDetails: '',
     },
   });
+
+  const handleAddressSelect = (selectedAddress: string) => {
+    form.setValue('address', selectedAddress, { shouldValidate: true });
+    setMapOpen(false);
+  };
 
   const generateWhatsAppMessage = (data: z.infer<typeof orderSchema>) => {
     let message = `Halo Kopimi Cafe, saya mau pesan:\n\n`;
@@ -57,10 +70,6 @@ export default function OrderForm() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const openGoogleMaps = () => {
-    window.open('https://www.google.com/maps', '_blank');
-  };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -82,20 +91,29 @@ export default function OrderForm() {
           name="address"
           render={({ field }) => (
             <FormItem>
-              <div className="flex justify-between items-center">
-                <FormLabel>Alamat Lengkap</FormLabel>
-                <Button type="button" variant="link" className="h-auto p-0" onClick={openGoogleMaps}>
-                  <Map className="mr-2 h-4 w-4" />
-                  Buka Google Maps
-                </Button>
-              </div>
+              <FormLabel>Alamat Lengkap</FormLabel>
               <FormControl>
-                <Textarea placeholder="Salin dan tempel alamat Anda dari Google Maps di sini..." {...field} />
+                <Textarea placeholder="Pilih dari peta atau isi manual..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+         <Dialog open={isMapOpen} onOpenChange={setMapOpen}>
+          <DialogTrigger asChild>
+            <Button type="button" variant="outline" className="w-full">
+              <MapPin className="mr-2 h-4 w-4" /> Pilih Lokasi dari Peta
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-3xl h-[80vh]">
+            <DialogHeader>
+              <DialogTitle>Pilih Lokasi Pengiriman</DialogTitle>
+            </DialogHeader>
+            <div className="h-full w-full">
+               <MapPicker onLocationSelect={handleAddressSelect} />
+            </div>
+          </DialogContent>
+        </Dialog>
         <FormField
           control={form.control}
           name="addressDetails"
