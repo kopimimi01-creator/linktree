@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Clock, Sparkles, Gift } from "lucide-react";
 
-const menu = {
+export const menu = {
   "Coffee Series": [
     { name: "Americano", price: 15000 },
     { name: "Coffee Tubruk", price: 12000 },

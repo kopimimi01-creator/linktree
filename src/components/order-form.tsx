@@ -133,7 +133,7 @@ export default function OrderForm({ menuData }: OrderFormProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-3">
           <div className="space-y-8">
-            {Object.entries(menuData).map(([category, items]) => (
+            {menuData && Object.entries(menuData).map(([category, items]) => (
               <div key={category}>
                 <h3 className="text-2xl font-headline font-semibold text-primary mb-4">{category}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
