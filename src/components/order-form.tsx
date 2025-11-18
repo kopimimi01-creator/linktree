@@ -198,7 +198,7 @@ export default function OrderForm({ menuData }: OrderFormProps) {
                 {cart.map((item) => (
                   <div key={item.name} className="py-4 flex items-center justify-between gap-4">
                     <div className="flex-1">
-                      <p className="font-semibold">{item.name}</p>
+                      <p className="font-semibold text-foreground">{item.name}</p>
                       <p className="text-sm text-muted-foreground">{formatPrice(item.price)}</p>
                     </div>
                     <div className="flex items-center gap-2">
