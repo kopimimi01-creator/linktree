@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingCart, MessageSquare } from "lucide-react";
@@ -30,7 +31,7 @@ export default function OrderOnlineSection() {
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
-            <Link href="#">
+            <Link href="https://spf.shopee.co.id/4VUbPKDWMt" target="_blank" rel="noopener noreferrer">
               <ShoppingCart className="mr-2 h-5 w-5" />
               Shopee Food
             </Link>
