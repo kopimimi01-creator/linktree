@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import { LatLngExpression, LatLng, Icon, Map } from 'leaflet';
 import { Button } from './ui/button';
 
@@ -23,15 +23,14 @@ type MapPickerProps = {
 
 const SEMARANG_CENTER: LatLngExpression = [-7.0051, 110.4381]; // Centered on Semarang
 
-function LocationMarker({ position, setPosition, map }: { position: LatLng, setPosition: (pos: LatLng) => void, map: Map | null }) {
+function LocationMarker({ onPositionChange }: { onPositionChange: (pos: LatLng) => void }) {
   const markerRef = useRef<any>(null);
+  const map = useMap();
   
   useMapEvents({
     click(e) {
-      setPosition(e.latlng);
-      if (map) {
-        map.flyTo(e.latlng, map.getZoom());
-      }
+      onPositionChange(e.latlng);
+      map.flyTo(e.latlng, map.getZoom());
     },
   });
 
@@ -40,12 +39,25 @@ function LocationMarker({ position, setPosition, map }: { position: LatLng, setP
       dragend() {
         const marker = markerRef.current;
         if (marker != null) {
-          setPosition(marker.getLatLng());
+          onPositionChange(marker.getLatLng());
         }
       },
     }),
-    [setPosition],
+    [onPositionChange],
   );
+
+  const [position, setPosition] = useState(map.getCenter());
+
+  useEffect(() => {
+    const newMarker = (e: any) => {
+      setPosition(e.target.getLatLng());
+    };
+    map.on('move', newMarker);
+    return () => {
+      map.off('move', newMarker);
+    };
+  }, [map]);
+
 
   return (
     <Marker
@@ -85,7 +97,7 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
     }
   }, []);
 
-  const handleSetPosition = useCallback((pos: LatLng) => {
+  const handlePositionChange = useCallback((pos: LatLng) => {
     setPosition(pos);
     fetchAddress(pos.lat, pos.lng);
   }, [fetchAddress]);
@@ -100,6 +112,7 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
     <div className="flex flex-col h-full">
       <div className="relative h-full w-full rounded-md overflow-hidden z-0">
         <MapContainer
+          key={Date.now()}
           center={position}
           zoom={13}
           style={{ height: '100%', width: '100%' }}
@@ -109,7 +122,7 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <LocationMarker position={position} setPosition={handleSetPosition} map={map} />
+          <LocationMarker onPositionChange={handlePositionChange} />
         </MapContainer>
       </div>
       <div className="p-4 bg-background border-t">
