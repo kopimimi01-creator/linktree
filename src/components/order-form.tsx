@@ -11,13 +11,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
 import { MapPin } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-
-const MapPicker = dynamic(() => import('@/components/map-picker'), {
-  ssr: false,
-});
 
 const orderSchema = z.object({
   customerName: z.string().min(1, 'Nama tidak boleh kosong'),
@@ -27,8 +22,7 @@ const orderSchema = z.object({
 
 export default function OrderForm() {
   const { cart, totalPrice } = useCart();
-  const [isMapOpen, setMapOpen] = useState(false);
-
+  
   const form = useForm<z.infer<typeof orderSchema>>({
     resolver: zodResolver(orderSchema),
     defaultValues: {
@@ -37,11 +31,6 @@ export default function OrderForm() {
       addressDetails: '',
     },
   });
-
-  const handleAddressSelect = (selectedAddress: string) => {
-    form.setValue('address', selectedAddress, { shouldValidate: true });
-    setMapOpen(false);
-  };
 
   const generateWhatsAppMessage = (data: z.infer<typeof orderSchema>) => {
     let message = `Halo Kopimi Cafe, saya mau pesan:\n\n`;
@@ -93,27 +82,12 @@ export default function OrderForm() {
             <FormItem>
               <FormLabel>Alamat Lengkap</FormLabel>
               <FormControl>
-                <Textarea placeholder="Pilih dari peta atau isi manual..." {...field} />
+                <Textarea placeholder="Masukkan alamat lengkap Anda..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-         <Dialog open={isMapOpen} onOpenChange={setMapOpen}>
-          <DialogTrigger asChild>
-            <Button type="button" variant="outline" className="w-full">
-              <MapPin className="mr-2 h-4 w-4" /> Pilih Lokasi dari Peta
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-3xl h-[80vh] flex flex-col">
-            <DialogHeader>
-              <DialogTitle>Pilih Lokasi Pengiriman</DialogTitle>
-            </DialogHeader>
-            <div className="h-full w-full flex-1">
-               {isMapOpen && <MapPicker onLocationSelect={handleAddressSelect} />}
-            </div>
-          </DialogContent>
-        </Dialog>
         <FormField
           control={form.control}
           name="addressDetails"
