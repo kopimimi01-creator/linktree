@@ -213,7 +213,7 @@ export default function MenuSection() {
   const isOrderPage = typeof window !== 'undefined' && window.location.pathname.includes('/order');
   if (isOrderPage) return null;
   
-  const bgColor = 'bg-[#06261C]';
+  const bgColor = 'bg-primary';
   const textColor = 'text-primary-foreground';
   const headingColor = 'text-amber-300';
   const separatorColor = 'bg-primary-foreground/20';
@@ -239,7 +239,7 @@ export default function MenuSection() {
                       <span className={itemColor}>{item.name}</span>
                       {isGoldenHour && category === 'Coffee Series' ? (
                         <div className="flex items-center gap-3">
-                          <span className="text-muted-foreground line-through text-sm">
+                          <span className="text-primary-foreground/60 line-through text-sm">
                             {formatPrice(item.price)}
                           </span>
                           <span className="font-semibold text-amber-300">

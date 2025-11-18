@@ -6,8 +6,8 @@ import { Toaster } from '@/components/ui/toaster';
 
 
 export const metadata: Metadata = {
-  title: 'Kopimi Experience',
-  description: 'Kopimi Cafe: Sudut nyaman untuk kehangatan harimu. Yang Penting Kamu.',
+  title: 'Kopimi Cafe',
+  description: 'Dibuat dengan hati, disajikan dengan senyuman. Yang Penting Kamu.',
 };
 
 export default function RootLayout({
