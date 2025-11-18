@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { MapPin, RefreshCw } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
 import { formatPrice } from '@/components/sections/menu';
 
@@ -57,37 +56,6 @@ export default function OrderForm() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const autofillLocation = () => {
-    form.setValue('address', "Mencari lokasi...");
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-            .then(res => res.json())
-            .then(data => {
-              if (data && data.display_name) {
-                form.setValue('address', data.display_name);
-              } else {
-                form.setValue('address', `Koordinat: ${latitude}, ${longitude}`);
-              }
-            })
-            .catch(() => {
-              alert('Gagal mendapatkan nama alamat. Menggunakan koordinat.');
-              form.setValue('address', `Koordinat: ${latitude}, ${longitude}`);
-            });
-        },
-        (error) => {
-          alert(`Gagal mendapatkan lokasi: ${error.message}`);
-          form.setValue('address', "");
-        }
-      );
-    } else {
-      alert('Geolocation tidak didukung oleh browser ini.');
-      form.setValue('address', "");
-    }
-  };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -111,19 +79,7 @@ export default function OrderForm() {
             <FormItem>
               <FormLabel>Alamat Lengkap</FormLabel>
               <FormControl>
-                <div className="relative">
-                   <Textarea placeholder="Jl. Pahlawan No. 123..." {...field} />
-                   <div className="absolute top-1 right-1 flex items-center">
-                    <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
-                      <MapPin className="h-4 w-4" />
-                      <span className="sr-only">Gunakan lokasi saat ini</span>
-                    </Button>
-                    <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={autofillLocation}>
-                      <RefreshCw className="h-4 w-4" />
-                      <span className="sr-only">Segarkan lokasi</span>
-                    </Button>
-                  </div>
-                </div>
+                <Textarea placeholder="Jl. Pahlawan No. 123..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
