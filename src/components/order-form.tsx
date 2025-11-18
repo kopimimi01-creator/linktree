@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from '@/components/ui/sheet';
 import { ShoppingCart, Plus, Minus, Trash2, MapPin, RefreshCw } from 'lucide-react';
-import MenuSection, { menu, bundles, formatPrice, calculateDiscountedPrice } from '@/components/sections/menu';
+import { menu, Promos, formatPrice, calculateDiscountedPrice } from '@/components/sections/menu';
 
 
 const orderSchema = z.object({
@@ -37,6 +37,7 @@ type OrderFormProps = {
 export default function OrderForm({ menuData }: OrderFormProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isGoldenHour, setIsGoldenHour] = useState(false);
 
   const form = useForm<z.infer<typeof orderSchema>>({
     resolver: zodResolver(orderSchema),
@@ -48,6 +49,12 @@ export default function OrderForm({ menuData }: OrderFormProps) {
   });
 
   const addToCart = (item: MenuItem) => {
+    const price = (isGoldenHour && menu['Coffee Series'].some(coffee => coffee.name === item.name)) 
+                  ? calculateDiscountedPrice(item.price) 
+                  : item.price;
+    
+    const itemWithCorrectPrice = { ...item, price };
+
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.name === item.name);
       if (existingItem) {
@@ -55,7 +62,7 @@ export default function OrderForm({ menuData }: OrderFormProps) {
           cartItem.name === item.name ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         );
       }
-      return [...prevCart, { ...item, quantity: 1 }];
+      return [...prevCart, { ...itemWithCorrectPrice, quantity: 1 }];
     });
   };
 
@@ -130,12 +137,38 @@ export default function OrderForm({ menuData }: OrderFormProps) {
     }
   };
 
-
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-3">
-          <MenuSection />
+          <div className="space-y-12">
+            <Promos onGoldenHourChange={setIsGoldenHour} />
+            {Object.entries(menuData).map(([category, items]) => (
+              <div key={category}>
+                <h3 className="text-2xl font-headline font-semibold text-primary mb-4">{category}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {items.map((item) => (
+                    <div key={item.name} className="border rounded-lg p-4 flex flex-col justify-between shadow-sm">
+                      <div>
+                        <h4 className="font-semibold">{item.name}</h4>
+                        {isGoldenHour && category === 'Coffee Series' ? (
+                          <div className="flex items-center gap-2">
+                            <p className="text-muted-foreground line-through text-sm">{formatPrice(item.price)}</p>
+                            <p className="text-amber-500 font-semibold">{formatPrice(calculateDiscountedPrice(item.price))}</p>
+                          </div>
+                        ) : (
+                          <p className="text-muted-foreground">{formatPrice(item.price)}</p>
+                        )}
+                      </div>
+                      <Button onClick={() => addToCart(item)} className="mt-4 w-full">
+                        Tambah
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       
