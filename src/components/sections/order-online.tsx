@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, MessageSquare } from "lucide-react";
 
 export default function OrderOnlineSection() {
   return (
@@ -10,7 +10,13 @@ export default function OrderOnlineSection() {
         <p className="mt-4 max-w-2xl mx-auto text-center text-lg text-muted-foreground">
           Nikmati Kopimi Cafe di mana pun kamu berada. Pesan melalui platform favoritmu.
         </p>
-        <div className="mt-12 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="mt-12 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
+            <Link href="/order">
+              <MessageSquare className="mr-2 h-5 w-5" />
+              WhatsApp
+            </Link>
+          </Button>
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
             <Link href="#">
               <ShoppingCart className="mr-2 h-5 w-5" />
@@ -30,6 +36,7 @@ export default function OrderOnlineSection() {
             </Link>
           </Button>
         </div>
+        <p className="text-center text-sm text-muted-foreground mt-4">Pemesanan via WhatsApp akan diantar oleh Maxim (ongkir ditanggung pelanggan).</p>
       </div>
     </section>
   );

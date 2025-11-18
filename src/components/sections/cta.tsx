@@ -9,7 +9,7 @@ export default function CtaSection() {
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-foreground">Hadirkan Kehangatan di Harimu</h2>
           <div className="mt-8">
             <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md" asChild>
-              <Link href="#order-online">Pesan Sekarang</Link>
+              <Link href="/order">Pesan Sekarang</Link>
             </Button>
           </div>
         </div>

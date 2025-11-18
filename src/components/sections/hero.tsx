@@ -29,7 +29,7 @@ export default function HeroSection() {
           </div>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="transition-transform transform hover:scale-105 shadow-md" asChild>
-              <Link href="#order-online">Order Now</Link>
+              <Link href="/order">Order Now</Link>
             </Button>
             <Button size="lg" variant="outline" className="transition-transform transform hover:scale-105 shadow-md">
               View Menu
