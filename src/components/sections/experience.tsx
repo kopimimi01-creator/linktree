@@ -6,22 +6,22 @@ export default function ExperienceSection() {
     {
       icon: Home,
       title: "Interior Hangat & Simpel",
-      description: "Ruang kami dirancang untuk ketenangan, memadukan tekstur alami dengan garis-garis bersih.",
+      description: "Temukan sudut favoritmu di ruang kami yang simpel dan nyaman.",
     },
     {
       icon: Smile,
       title: "Pelayanan Ramah",
-      description: "Rasakan layanan yang sehangat dan se-mengundang minuman buatan tangan kami.",
+      description: "Kami siap menyambutmu dengan senyuman hangat.",
     },
     {
       icon: Leaf,
       title: "Rasa yang Konsisten",
-      description: "Setiap tegukan sama sempurnanya dengan yang terakhir, berkat filosofi kualitas kami.",
+      description: "Kopi buatan tangan kami, selalu nikmat setiap saat.",
     },
     {
       icon: Users,
       title: "Suasana Komunitas",
-      description: "Lebih dari sekadar kafe, kami adalah tempat berkumpul untuk teman dan para kreatif.",
+      description: "Tempat yang pas untuk ngobrol santai bareng teman.",
     },
   ];
 
