@@ -11,7 +11,7 @@ export default function OrderOnlineSection() {
         <p className="mt-4 max-w-2xl mx-auto text-center text-lg text-muted-foreground">
           Nikmati Kopimi Cafe di mana pun kamu berada. Pesan melalui platform favoritmu.
         </p>
-        <div className="mt-12 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-12 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
             <Link href="/order">
               <MessageSquare className="mr-2 h-5 w-5" />
@@ -22,12 +22,6 @@ export default function OrderOnlineSection() {
             <Link href="https://gofood.link/a/RiJkUdG" target="_blank" rel="noopener noreferrer">
               <ShoppingCart className="mr-2 h-5 w-5" />
               Gojek
-            </Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
-            <Link href="https://r.grab.com/g/6-20251119_125545_ecc35796f16241948535eaa78ce1b690_MEXMPS-6-C7NAT3CAGAXGR6" target="_blank" rel="noopener noreferrer">
-              <ShoppingCart className="mr-2 h-5 w-5" />
-              GrabFood
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
