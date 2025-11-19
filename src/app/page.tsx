@@ -1,5 +1,6 @@
 import HeroSection from '@/components/sections/hero';
 import AboutSection from '@/components/sections/about';
+import OpeningHoursSection from '@/components/sections/opening-hours';
 import ExperienceSection from '@/components/sections/experience';
 import MenuSection from '@/components/sections/menu';
 import StorySection from '@/components/sections/story';
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
+        <OpeningHoursSection />
         <ExperienceSection />
         <MenuSection />
         <StorySection />
