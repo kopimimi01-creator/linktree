@@ -24,6 +24,7 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Footer() {
   const whatsappNumber = "628179078878";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const instagramUrl = "https://www.instagram.com/kopimi.daily";
 
   return (
     <footer className="bg-primary text-primary-foreground/70">
@@ -34,7 +35,7 @@ export default function Footer() {
             <p className="mt-4 max-w-sm">Dibuat dengan hati, disajikan dengan senyuman. Dosis kehangatan dan sambutan harianmu. Yang Penting Kamu</p>
             <div className="flex space-x-4 mt-6">
               <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><WhatsAppIcon className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
-              <Link href="#" aria-label="Instagram"><Instagram className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
+              <Link href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
               <Link href="#" aria-label="Facebook"><Facebook className="w-6 h-6 hover:text-primary-foreground transition-colors" /></Link>
             </div>
           </div>
