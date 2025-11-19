@@ -15,6 +15,15 @@ export default function StorySection() {
             />
           </div>
           <div className="text-left">
+            <div className="relative w-full h-64 mb-8 rounded-lg overflow-hidden shadow-lg">
+                <Image
+                    src="https://i.imgur.com/KvVYUHb.jpeg"
+                    alt="Kopi disajikan"
+                    fill
+                    className="object-cover"
+                    data-ai-hint="coffee serving"
+                />
+            </div>
             <h2 className="text-4xl md:text-5xl font-headline font-bold">Cerita Kami</h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               Kopimi Cafe dimulai dari mimpi sederhana: menciptakan tempat di mana komunitas bisa berkumpul sambil menikmati minuman istimewa. Kami bukan hanya menyajikan minuman; kami membangun koneksi dan memberikan momen hangat di tengah hari sibukmu.
