@@ -24,6 +24,12 @@ export default function OrderOnlineSection() {
               Gojek
             </Link>
           </Button>
+           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
+            <Link href="https://r.grab.com/g/6-20251119_125545_ecc35796f16241948535eaa78ce1b690_MEXMPS-6-C7NAT3CAGAXGR6" target="_blank" rel="noopener noreferrer">
+              <ShoppingCart className="mr-2 h-5 w-5" />
+              GrabFood
+            </Link>
+          </Button>
           <Button size="lg" variant="outline" asChild className="transition-transform transform hover:scale-105">
             <Link href="https://spf.shopee.co.id/4VUbPKDWMt" target="_blank" rel="noopener noreferrer">
               <ShoppingCart className="mr-2 h-5 w-5" />
